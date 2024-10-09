@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreProjectRequest extends FormRequest
 {
@@ -24,8 +25,9 @@ class StoreProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:200',
-            'description' => 'nullable|string'
+            'name' => ['required', 'max:200'],
+            'description' => ['nullable', 'string'],
+            'category_id' => ['nullable', Rule::exists('categories', 'id')],
         ];
     }
 
@@ -33,7 +35,8 @@ class StoreProjectRequest extends FormRequest
     {
         return [
             "name.required" => "Il nome del progetto è obbligatorio",
-            "name.max" => "Il nome del progetto non può superare i 200 caratteri"
+            "name.max" => "Il nome del progetto non può superare i 200 caratteri",
+            "category_id.exists" => "La categoria selezionata non esiste"
         ];
     }
 }

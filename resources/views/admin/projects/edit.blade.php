@@ -30,7 +30,7 @@
                             <input type="file" name="project_image" id="project_image">
                             @if ($project->project_image)
                                 <div class="mt-2">
-                                    <img src="{{ filter_var($project->project_image, FILTER_VALIDATE_URL) ? $project->project_image : asset('storage/' . $project->project_image) }}"
+                                    <img src="{{ filter_var($project->project_image, FILTER_VALIDATE_URL) ? $project->project_image : asset('./storage/' . $project->project_image) }}"
                                         alt="Project Image" style="width: 200px;">
                                 </div>
                             @else
@@ -40,10 +40,22 @@
                             @endif
                         </div>
                         <div class="col-12">
+                            <label class="control-label">Categoria Progetto</label>
+                            <select name="category_id" id="" class="form-select" required>
+                                <option value="">Seleziona categoria</option>
+                                @foreach ($categories as $category)
+                                    @if ($project->category && $project->category->id == $category->id)
+                                        <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                                    @else
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-12">
                             <label for="" class="control-label">Descrizione Progetto</label>
                             <textarea name="description" id="" cols="30" rows="10" class="form-control form-control-sm">{{ old('description', $project->description) }}</textarea>
                         </div>
-
                         <div class="col-12">
                             <button type="submit" class="btn btn-sm btn-primary">Aggiorna</button>
                         </div>

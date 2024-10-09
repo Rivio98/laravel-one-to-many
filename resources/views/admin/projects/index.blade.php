@@ -17,6 +17,7 @@
                                 <th>Nome</th>
                                 <th>Slug</th>
                                 <th>Descrizione</th>
+                                <th>Categoria</th>
                                 <th>Azioni</th>
                             </tr>
                         </thead>
@@ -26,6 +27,8 @@
                                     <td>{{ $project->name }}</td>
                                     <td>{{ $project->slug }}</td>
                                     <td>{{ $project->description }}</td>
+                                    <td>{{ $project->category ? $project->category->name : 'Nessuna Categoria' }}</td>
+
                                     <td>
                                         <a href="{{ route('admin.projects.show', $project->id) }}"
                                             class="btn btn-sm btn-info" title="Visualizza">

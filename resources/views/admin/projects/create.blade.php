@@ -29,6 +29,15 @@
                             <input type="file" name="project_image" id="project_image">
                         </div>
                         <div class="col-12 py-3">
+                            <label for="" class="control-label">Seleziona tipo di progetto:</label>
+                            <select name="category_id" id="" class="form-select" required>
+                                <option value="">Seleziona categoria</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-12 py-3">
                             <label for="" class="control-label">Descrizione progetto</label>
                             <textarea name="description" id="" cols="30" rows="10" class="form-control form-control-sm"></textarea>
                         </div>
